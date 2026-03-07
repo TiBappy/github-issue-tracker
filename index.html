@@ -20,13 +20,9 @@
       referrerpolicy="no-referrer"
     />
     <!-- Google Font -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
     <!-- StyleSheet -->
     <link rel="stylesheet" href="./style.css" />
   </head>
@@ -46,16 +42,16 @@
           <div class="card-body p-8">
             <fieldset class="fieldset">
               <label class="label text-xl font-semibold">Username</label>
-              <input type="text" class="input text-md font-semibold" placeholder="Enter Username" />
+              <input id="Username" type="text" class="input text-md font-semibold" placeholder="Enter Username" />
               <label class="label text-xl font-semibold">Password</label>
-              <input type="password" class="input text-md font-semibold" placeholder="Password" />
+              <input id="password" type="password" class="input text-md font-semibold" placeholder="Password" />
               <div><a class="link link-hover text-xl font-semibold">Forgot password?</a></div>
-              <button class="btn btn-primary mt-4">Sign In</button>
+              <button id="sign-in-btn" class="btn btn-primary mt-4">Sign In</button>
             </fieldset>
           </div>
         </div>
   </div>
      </div>
-    <script src="./script.js"></script>
+    <script src="./login.js"></script>
   </body>
 </html>

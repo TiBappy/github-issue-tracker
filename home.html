@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Github || Home</title>
+    <!-- DaisyUI & Tailwind css -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- StyleSheet -->
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <!-- Header Section -->
+    <header
+      class="w-11/12 mx-auto flex justify-between items-center border-2 border-red-500"
+    >
+      <div class="logo-section flex gap-4 items-center">
+        <img class="w-12" src="./assets/github-logo.png" alt="" />
+        <p class="text-xl font-bold">GitHub Issues Tracker</p>
+      </div>
+      <div class="flex gap-4">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" placeholder="Search issues" class="input" />
+        <button class="btn btn-primary">
+          <i class="fa-solid fa-plus"></i>New Issue
+        </button>
+      </div>
+    </header>
+
+    <!-- Tab Section -->
+    <section class="bg-green-50 pt-10 px-4 shadow-md">
+      <div class="w-11/12 mx-auto bg-white ">
+        <button class="btn btn-primary">All</button>
+        <button class="btn">Opened</button>
+        <button class="btn">Closed</button>
+      </div>
+    </section>
+
+    <!-- Issued Tracker -->
+    <section class="bg-green-50 px-4 pt-1">
+      <div class="w-11/12 mx-auto bg-white shadow p-3">
+        <div class="flex gap-2 items-center justify-between">
+          <div class="flex gap-2 items-center">
+            <div class="bg-green-100 p-1 rounded-full ml-2">
+              <img class="h-6" src="./assets/Aperture.png" alt="" />
+            </div>
+            <div>
+              <h2 class="text-lg font-semibold">50 Issues</h2>
+              <p class="text-sm">Track and manage your project issues</p>
+            </div>
+          </div>
+          <div class="flex">
+            <div class="w-2 h-2 bg-green-500 rounded-full">Opened</div>
+            <div class="w-2 h-2 bg-purple-500 rounded-full">Closed</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cards Section -->
+     <section class="bg-green-50 pt-3">
+        <div class="w-11/12 mx-auto">
+
+            <!-- cards Conatiner -->
+            <div id="cards-container">
+
+            </div>
+        </div>
+     </section>
+    <script src="./script.js"></script>
+  </body>
+</html>
