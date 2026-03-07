@@ -4,14 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Github || Home</title>
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <!-- DaisyUI & Tailwind css -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <!-- Tailwind & DaisyUI -->
+
     <link
       href="https://cdn.jsdelivr.net/npm/daisyui@5"
       rel="stylesheet"
       type="text/css"
     />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
     <!-- Font Awesome -->
     <link
       rel="stylesheet"
@@ -27,13 +30,14 @@
       href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap"
       rel="stylesheet"
     />
+
     <!-- StyleSheet -->
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
     <!-- Header Section -->
     <header
-      class="w-11/12 mx-auto flex justify-between items-center border-2 border-red-500"
+      class="w-11/12 mx-auto flex justify-between items-center"
     >
       <div class="logo-section flex gap-4 items-center">
         <img class="w-12" src="./assets/github-logo.png" alt="" />
@@ -49,17 +53,17 @@
     </header>
 
     <!-- Tab Section -->
-    <section class="bg-green-50 pt-10 px-4 shadow-md">
-      <div class="w-11/12 mx-auto bg-white ">
-        <button class="btn btn-primary">All</button>
-        <button class="btn">Opened</button>
-        <button class="btn">Closed</button>
+    <section class="bg-green-50 px-4 pt-2">
+      <div id="toggle-btn" class="w-11/12 mx-auto bg-white shadow p-3 rounded-lg">
+        <button id="primary-btn" class="btn btn-primary">all</button>
+        <button id="opened-btn" class="btn">Opened</button>
+        <button id="closed-btn" class="btn">Closed</button>
       </div>
     </section>
 
     <!-- Issued Tracker -->
-    <section class="bg-green-50 px-4 pt-1">
-      <div class="w-11/12 mx-auto bg-white shadow p-3">
+    <section class="bg-green-50 px-4 pt-2">
+      <div class="w-11/12 mx-auto bg-white shadow p-3 rounded-lg">
         <div class="flex gap-2 items-center justify-between">
           <div class="flex gap-2 items-center">
             <div class="bg-green-100 p-1 rounded-full ml-2">
@@ -79,15 +83,20 @@
     </section>
 
     <!-- Cards Section -->
-     <section class="bg-green-50 pt-3">
-        <div class="w-11/12 mx-auto">
+    <section class="bg-green-50 pt-10 px-10">
+      <div id="" class="w-11/12 mx-auto bg-white">
+        <div
+          id="cards-container"
+          class="grid grid-cols-2 sm:grid-cols-4 gap-4"
+        ></div>
+      </div>
+    </section>
 
-            <!-- cards Conatiner -->
-            <div id="cards-container">
+    <!-- Loading spinner -->
+    <div id="loadingSpinner" class="h-[60vh] flex hidden justify-center items-center">
+      <span class="loading loading-dots loading-xl"></span>
+    </div>
 
-            </div>
-        </div>
-     </section>
     <script src="./script.js"></script>
   </body>
 </html>
