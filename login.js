@@ -8,8 +8,7 @@ document.getElementById("sign-in-btn").addEventListener("click", function () {
     alert("Login Success");
     // window.location.assign("/home.html");
     window.location.assign("/github-issue-tracker/home.html");
-  }
-  else {
+  } else {
     alert("log In failed");
     return;
   }
