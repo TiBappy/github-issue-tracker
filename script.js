@@ -1,5 +1,16 @@
 let allIssues = [];
 
+// Modal variable
+const issueModal = document.getElementById("issue-modal");
+const modalTitle = document.getElementById("modal-title");
+const modalDescription = document.getElementById("modal-description");
+const modalStatus = document.getElementById("modal-status");
+const modalPriority = document.getElementById("modal-priority");
+const modalAuthor = document.getElementById("modal-author");
+const modalDate = document.getElementById("modal-date");
+const modalAssignee = document.getElementById("modal-assignee");
+
+// common vaiable
 const cardsContainer = document.getElementById("cards-container");
 const loadingSpinner = document.getElementById("loadingSpinner");
 const totalIssues = document.getElementById("total-issues");
@@ -36,25 +47,27 @@ async function loadCards() {
 
 // Display Cards
 function displayCards(cards) {
-
   cardsContainer.innerHTML = "";
 
   cards.forEach((element) => {
-
     const singleCards = document.createElement("div");
+
+    // ⭐ Border Logic
+    const borderColor =
+      element.status === "open"
+        ? "border-l-4 border-green-500"
+        : "border-l-4 border-purple-500";
 
     singleCards.className = "h-full";
 
     singleCards.innerHTML = `
     
-    <div class="card bg-white shadow-lg p-4 space-y-3 border border-green-500 h-full">
+    <div class="card bg-white shadow-lg p-4 space-y-3 h-full cursor-pointer ${borderColor}">
     
       <div class="flex justify-between">
       
         <img src="./assets/${
-          element.status === "closed"
-            ? "Closed-Status.png"
-            : "Open-Status.png"
+          element.status === "closed" ? "Closed-Status.png" : "Open-Status.png"
         }">
         
         <div class="badge badge-soft badge-secondary">
@@ -96,73 +109,61 @@ function displayCards(cards) {
     
     `;
 
-    cardsContainer.appendChild(singleCards);
+    singleCards.addEventListener("click", function () {
+      openModal(element);
+    });
 
+    cardsContainer.appendChild(singleCards);
   });
 }
 
 // ALL
 document.getElementById("primary-btn").addEventListener("click", function () {
-
   setActiveButton("primary-btn");
 
   displayCards(allIssues);
 
   updateCounters(allIssues);
-
 });
 
 // OPEN
 document.getElementById("opened-btn").addEventListener("click", function () {
-
   setActiveButton("opened-btn");
 
-  const openedIssues = allIssues.filter(
-    (issue) => issue.status === "open"
-  );
+  const openedIssues = allIssues.filter((issue) => issue.status === "open");
 
   displayCards(openedIssues);
 
   updateCounters(openedIssues);
-
 });
 
 // CLOSED
 document.getElementById("closed-btn").addEventListener("click", function () {
-
   setActiveButton("closed-btn");
 
-  const closedIssues = allIssues.filter(
-    (issue) => issue.status === "closed"
-  );
+  const closedIssues = allIssues.filter((issue) => issue.status === "closed");
 
   displayCards(closedIssues);
 
   updateCounters(closedIssues);
-
 });
 
 // Active Button
 function setActiveButton(id) {
-
   document
     .querySelectorAll("#toggle-btn button")
     .forEach((btn) => btn.classList.remove("btn-primary"));
 
   document.getElementById(id).classList.add("btn-primary");
-
 }
 
 // Counter Function
 function updateCounters(cards) {
-
   totalIssues.innerText = `${cards.length} Issues`;
-
 }
 
 // Search Issue
 searchInput.addEventListener("input", function () {
-
   const searchText = searchInput.value.toLowerCase();
 
   const filteredIssues = allIssues.filter((issue) =>
@@ -172,7 +173,19 @@ searchInput.addEventListener("input", function () {
   displayCards(filteredIssues);
 
   updateCounters(filteredIssues);
-
 });
+
+// Open Modal
+function openModal(issue) {
+  modalTitle.innerText = issue.title;
+  modalDescription.innerText = issue.description;
+  modalStatus.innerText = issue.status;
+  modalPriority.innerText = issue.priority;
+  modalAuthor.innerText = issue.author;
+  modalAssignee.innerText = issue.assignee;
+  modalDate.innerText = new Date(issue.createdAt).toLocaleDateString();
+
+  issueModal.showModal();
+}
 
 loadCards();

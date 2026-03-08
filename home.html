@@ -42,7 +42,6 @@
         <p class="text-xl font-bold">GitHub Issues Tracker</p>
       </div>
       <div class="flex gap-4">
-        <i class="fa-solid fa-magnifying-glass"></i>
         <input
           id="search-input"
           type="text"
@@ -93,7 +92,7 @@
       <div id="" class="w-11/12 mx-auto bg-white">
         <div
           id="cards-container"
-          class="grid grid-cols-2 sm:grid-cols-4 gap-4"
+          class="grid grid-cols-1 sm:grid-cols-4 gap-4"
         ></div>
       </div>
     </section>
@@ -107,21 +106,59 @@
     </div>
 
     <!-- Cards Details Modal -->
-    <!-- Open the modal using ID.showModal() method -->
+    <dialog id="issue-modal" class="modal">
+      <div class="modal-box max-w-2xl p-0 overflow-hidden">
+        <!-- Header -->
+        <div class="flex justify-between items-center border-b p-5">
+          <h2 id="modal-title" class="text-xl font-bold"></h2>
 
-    <dialog id="card-details-modal" class="modal">
-      <div class="modal-box">
-        <h3 class="text-lg font-bold">Hello!</h3>
-        <p class="py-4">Press ESC key or click the button below to close</p>
-        <div class="modal-action">
           <form method="dialog">
-            <!-- if there is a button in form, it will close the modal -->
-            <button class="btn">Close</button>
+            <button class="text-gray-500 hover:text-black text-xl">✕</button>
+          </form>
+        </div>
+
+        <!-- Meta -->
+        <div class="px-5 pt-3 text-sm text-gray-500 flex gap-2 flex-wrap">
+          <span id="modal-status" class="badge badge-success"></span>
+
+          <span>Opened by <span id="modal-author"></span></span>
+
+          <span id="modal-date"></span>
+        </div>
+
+        <!-- Labels -->
+        <div class="px-5 pt-3 flex gap-2">
+          <span class="badge badge-outline bg-pink-100">BUG</span>
+
+          <span class="badge badge-outline bg-yellow-100">HELP WANTED</span>
+        </div>
+
+        <!-- Description -->
+        <div class="px-5 py-5 text-sm text-gray-700">
+          <p id="modal-description"></p>
+        </div>
+
+        <!-- Assignee -->
+        <div class="px-5 pb-4">
+          <p class="text-sm text-gray-500">Assignee</p>
+
+          <p id="modal-assignee" class="badge badge-outline badge-info"></p>
+        </div>
+
+        <!-- Footer -->
+        <div class="border-t px-5 py-4 flex justify-between items-center">
+          <div>
+            <p class="text-sm text-gray-500">Priority</p>
+
+            <span id="modal-priority" class="badge badge-secondary"></span>
+          </div>
+
+          <form method="dialog">
+            <button class="btn btn-primary">Close</button>
           </form>
         </div>
       </div>
     </dialog>
-
     <script src="./script.js"></script>
   </body>
 </html>
