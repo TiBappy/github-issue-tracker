@@ -1,6 +1,9 @@
 let allIssues = [];
+
 const cardsContainer = document.getElementById("cards-container");
 const loadingSpinner = document.getElementById("loadingSpinner");
+const totalIssues = document.getElementById("total-issues");
+const searchInput = document.getElementById("search-input");
 
 // Show Loading
 function showLoading() {
@@ -18,7 +21,7 @@ async function loadCards() {
   showLoading();
 
   const res = await fetch(
-    "https://phi-lab-server.vercel.app/api/v1/lab/issues",
+    "https://phi-lab-server.vercel.app/api/v1/lab/issues"
   );
 
   const data = await res.json();
@@ -26,47 +29,87 @@ async function loadCards() {
   hideLoading();
 
   allIssues = data.data;
-  console.log(allIssues.map(issue => issue.status));
+
   displayCards(allIssues);
+  updateCounters(allIssues);
 }
 
 // Display Cards
 function displayCards(cards) {
+
   cardsContainer.innerHTML = "";
+
   cards.forEach((element) => {
-    // console.log(element);
+
     const singleCards = document.createElement("div");
-    singleCards.className = "card bg-white shadow-lg p-4 space-y-3 rounded-lg";
+
+    singleCards.className = "h-full";
+
     singleCards.innerHTML = `
-         <div id="card" class="card bg-white p-4 space-y-3 border border-green-500 h-full">
-            <div class="flex justify-between">
-              <img src="./assets/Open-Status.png" alt="" />
-              <div class="badge badge-soft badge-secondary">${element.priority}</div>
-            </div>
-            <div class = "space-y-3">
-              <h2 class = "text-lg font-semibold">${element.title}</h2>
-              <p class="line-clamp-2 text-sm">
-                ${element.description}
-              </p>
-            </div>
-            <div class="flex gap-2">
-              <div class="badge badge-outline bg-pink-100 badge-secondary">BUG</div>
-              <div class="badge badge-outline badge-warning bg-yellow-100">HELP WANTED</div>
-            </div>
-            <hr>
-            <p class ="text-[14px]" id="author">${element.author}</p>
-            <p class ="text-[14px]" id="date">${element.createdAt}</p>
-          </div>`;
+    
+    <div class="card bg-white shadow-lg p-4 space-y-3 border border-green-500 h-full">
+    
+      <div class="flex justify-between">
+      
+        <img src="./assets/${
+          element.status === "closed"
+            ? "Closed-Status.png"
+            : "Open-Status.png"
+        }">
+        
+        <div class="badge badge-soft badge-secondary">
+        ${element.priority}
+        </div>
+        
+      </div>
+
+      <div class="space-y-3">
+      
+        <h2 class="text-lg font-semibold">
+        ${element.title}
+        </h2>
+
+        <p class="line-clamp-2 text-sm">
+        ${element.description}
+        </p>
+
+      </div>
+
+      <div class="flex gap-2">
+
+        <div class="badge badge-outline bg-pink-100 badge-secondary">
+        BUG
+        </div>
+
+        <div class="badge badge-outline badge-warning bg-yellow-100">
+        HELP WANTED
+        </div>
+
+      </div>
+
+      <hr>
+
+      <p class="text-[14px]">${element.author}</p>
+      <p class="text-[14px]">${element.createdAt}</p>
+
+    </div>
+    
+    `;
 
     cardsContainer.appendChild(singleCards);
+
   });
 }
-loadCards();
 
 // ALL
 document.getElementById("primary-btn").addEventListener("click", function () {
+
   setActiveButton("primary-btn");
+
   displayCards(allIssues);
+
+  updateCounters(allIssues);
+
 });
 
 // OPEN
@@ -75,36 +118,61 @@ document.getElementById("opened-btn").addEventListener("click", function () {
   setActiveButton("opened-btn");
 
   const openedIssues = allIssues.filter(
-    issue => issue.status === "open"
+    (issue) => issue.status === "open"
   );
 
   displayCards(openedIssues);
 
+  updateCounters(openedIssues);
+
 });
 
-
-// Closed
+// CLOSED
 document.getElementById("closed-btn").addEventListener("click", function () {
 
   setActiveButton("closed-btn");
 
   const closedIssues = allIssues.filter(
-    issue => issue.status === "closed"
+    (issue) => issue.status === "closed"
   );
 
   displayCards(closedIssues);
 
+  updateCounters(closedIssues);
+
 });
 
-
-function setActiveButton(id){
+// Active Button
+function setActiveButton(id) {
 
   document
     .querySelectorAll("#toggle-btn button")
-    .forEach(btn => btn.classList.remove("btn-primary"));
+    .forEach((btn) => btn.classList.remove("btn-primary"));
 
-  document
-    .getElementById(id)
-    .classList.add("btn-primary");
+  document.getElementById(id).classList.add("btn-primary");
 
 }
+
+// Counter Function
+function updateCounters(cards) {
+
+  totalIssues.innerText = `${cards.length} Issues`;
+
+}
+
+// Search Issue
+searchInput.addEventListener("input", function () {
+
+  const searchText = searchInput.value.toLowerCase();
+
+  const filteredIssues = allIssues.filter((issue) =>
+    issue.title.toLowerCase().includes(searchText)
+  );
+
+  displayCards(filteredIssues);
+
+  updateCounters(filteredIssues);
+
+});
+
+loadCards();

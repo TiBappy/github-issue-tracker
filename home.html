@@ -36,16 +36,19 @@
   </head>
   <body>
     <!-- Header Section -->
-    <header
-      class="w-11/12 mx-auto flex justify-between items-center"
-    >
+    <header class="w-11/12 mx-auto flex justify-between items-center">
       <div class="logo-section flex gap-4 items-center">
         <img class="w-12" src="./assets/github-logo.png" alt="" />
         <p class="text-xl font-bold">GitHub Issues Tracker</p>
       </div>
       <div class="flex gap-4">
         <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" placeholder="Search issues" class="input" />
+        <input
+          id="search-input"
+          type="text"
+          placeholder="Search issues"
+          class="input"
+        />
         <button class="btn btn-primary">
           <i class="fa-solid fa-plus"></i>New Issue
         </button>
@@ -54,9 +57,12 @@
 
     <!-- Tab Section -->
     <section class="bg-green-50 px-4 pt-2">
-      <div id="toggle-btn" class="w-11/12 mx-auto bg-white shadow p-3 rounded-lg">
-        <button id="primary-btn" class="btn btn-primary">all</button>
-        <button id="opened-btn" class="btn">Opened</button>
+      <div
+        id="toggle-btn"
+        class="w-11/12 mx-auto bg-white shadow p-3 rounded-lg"
+      >
+        <button id="primary-btn" class="btn btn-primary">All</button>
+        <button id="opened-btn" class="btn">Open</button>
         <button id="closed-btn" class="btn">Closed</button>
       </div>
     </section>
@@ -70,7 +76,7 @@
               <img class="h-6" src="./assets/Aperture.png" alt="" />
             </div>
             <div>
-              <h2 class="text-lg font-semibold">50 Issues</h2>
+              <h2 id="total-issues" class="text-lg font-semibold"></h2>
               <p class="text-sm">Track and manage your project issues</p>
             </div>
           </div>
@@ -93,7 +99,10 @@
     </section>
 
     <!-- Loading spinner -->
-    <div id="loadingSpinner" class="h-[60vh] flex hidden justify-center items-center">
+    <div
+      id="loadingSpinner"
+      class="h-[60vh] flex hidden justify-center items-center"
+    >
       <span class="loading loading-dots loading-xl"></span>
     </div>
 
