@@ -32,7 +32,7 @@ async function loadCards() {
   showLoading();
 
   const res = await fetch(
-    "https://phi-lab-server.vercel.app/api/v1/lab/issues"
+    "https://phi-lab-server.vercel.app/api/v1/lab/issues",
   );
 
   const data = await res.json();
@@ -89,33 +89,29 @@ function displayCards(cards) {
 
       <!-- Dynamic Styled Labels -->
       <div class="flex flex-wrap gap-2">
-        ${
-          element.labels
-            .map((label) => {
+        ${element.labels
+          .map((label) => {
+            let badgeStyle = "badge-outline";
 
-              let badgeStyle = "badge-outline";
+            if (label.toLowerCase().includes("enhancement")) {
+              badgeStyle = "badge-soft badge-success";
+            } else if (label.toLowerCase().includes("documentation")) {
+              badgeStyle = "badge-soft badge-info";
+            } else if (label.toLowerCase().includes("bug")) {
+              badgeStyle = "badge-soft badge-error";
+            } else if (label.toLowerCase().includes("help")) {
+              badgeStyle = "badge-soft badge-warning";
+            } else if (label.toLowerCase().includes("good first issue")) {
+              badgeStyle = "badge-soft badge-primary";
+            }
 
-              if (label.toLowerCase().includes("enhancement")) {
-                badgeStyle = "badge-soft badge-success";
-              } 
-              else if (label.toLowerCase().includes("documentation")) {
-                badgeStyle = "badge-soft badge-info";
-              } 
-              else if (label.toLowerCase().includes("bug")) {
-                badgeStyle = "badge-soft badge-error";
-              } 
-              else if (label.toLowerCase().includes("help")) {
-                badgeStyle = "badge-soft badge-warning";
-              }
-
-              return `
+            return `
               <span class="badge ${badgeStyle} text-xs px-3 py-2">
                 ${label}
               </span>
               `;
-            })
-            .join("")
-        }
+          })
+          .join("")}
       </div>
 
       <hr>
@@ -187,7 +183,7 @@ searchInput.addEventListener("input", function () {
   const searchText = searchInput.value.toLowerCase();
 
   const filteredIssues = allIssues.filter((issue) =>
-    issue.title.toLowerCase().includes(searchText)
+    issue.title.toLowerCase().includes(searchText),
   );
 
   displayCards(filteredIssues);
@@ -197,9 +193,8 @@ searchInput.addEventListener("input", function () {
 
 // Open Modal (Single Issue API)
 async function openModal(issue) {
-
   const res = await fetch(
-    `https://phi-lab-server.vercel.app/api/v1/lab/issue/${issue.id}`
+    `https://phi-lab-server.vercel.app/api/v1/lab/issue/${issue.id}`,
   );
 
   const data = await res.json();
@@ -210,11 +205,12 @@ async function openModal(issue) {
   modalDescription.innerText = singleIssue.description;
   modalStatus.innerText = singleIssue.status;
   modalPriority.innerText = singleIssue.priority;
-  modalAuthor.innerText = singleIssue.author;
-  modalAssignee.innerText = singleIssue.assignee;
+  modalAuthor.innerText = singleIssue.author?.name || singleIssue.author;
+  modalAssignee.innerText = singleIssue.assignee?.name || singleIssue.assignee;
   modalDate.innerText = new Date(singleIssue.createdAt).toLocaleDateString();
 
   issueModal.showModal();
+  console.log(singleIssue);
 }
 
 loadCards();
