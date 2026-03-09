@@ -6,8 +6,8 @@ document.getElementById("sign-in-btn").addEventListener("click", function () {
 
   if (userName === "admin" && userPassword === "admin123") {
     alert("Login Success");
-    window.location.assign("/home.html");
-    // window.location.assign("/github-issue-tracker/home.html");
+    // window.location.assign("/home.html");
+    window.location.assign("/github-issue-tracker/home.html");
   } else {
     alert("log In failed");
     return;
