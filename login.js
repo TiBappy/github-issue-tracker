@@ -1,6 +1,5 @@
 document.getElementById("sign-in-btn").addEventListener("click", function () {
   // Get the UserName & Passwword
-
   const userName = document.getElementById("Username").value.trim();
   const userPassword = document.getElementById("password").value.trim();
 

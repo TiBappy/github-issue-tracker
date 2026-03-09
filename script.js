@@ -30,17 +30,12 @@ function hideLoading() {
 // Load Cards
 async function loadCards() {
   showLoading();
-
   const res = await fetch(
     "https://phi-lab-server.vercel.app/api/v1/lab/issues",
   );
-
   const data = await res.json();
-
   hideLoading();
-
   allIssues = data.data;
-
   displayCards(allIssues);
   updateCounters(allIssues);
 }
@@ -48,7 +43,6 @@ async function loadCards() {
 // Display Cards
 function displayCards(cards) {
   cardsContainer.innerHTML = "";
-
   cards.forEach((element) => {
     const singleCards = document.createElement("div");
 
@@ -58,7 +52,6 @@ function displayCards(cards) {
         : "border-l-4 border-purple-500";
 
     singleCards.className = "h-full";
-
     singleCards.innerHTML = `
     
     <div class="card bg-white shadow-lg p-4 space-y-3 h-full cursor-pointer ${borderColor}">
@@ -128,39 +121,30 @@ function displayCards(cards) {
     singleCards.addEventListener("click", function () {
       openModal(element);
     });
-
     cardsContainer.appendChild(singleCards);
   });
 }
 
-// ALL
+// All Issues
 document.getElementById("primary-btn").addEventListener("click", function () {
   setActiveButton("primary-btn");
-
   displayCards(allIssues);
-
   updateCounters(allIssues);
 });
 
-// OPEN
+//Open Btn
 document.getElementById("opened-btn").addEventListener("click", function () {
   setActiveButton("opened-btn");
-
   const openedIssues = allIssues.filter((issue) => issue.status === "open");
-
   displayCards(openedIssues);
-
   updateCounters(openedIssues);
 });
 
-// CLOSED
+// Closed btn
 document.getElementById("closed-btn").addEventListener("click", function () {
   setActiveButton("closed-btn");
-
   const closedIssues = allIssues.filter((issue) => issue.status === "closed");
-
   displayCards(closedIssues);
-
   updateCounters(closedIssues);
 });
 
@@ -169,7 +153,6 @@ function setActiveButton(id) {
   document
     .querySelectorAll("#toggle-btn button")
     .forEach((btn) => btn.classList.remove("btn-primary"));
-
   document.getElementById(id).classList.add("btn-primary");
 }
 
@@ -181,13 +164,10 @@ function updateCounters(cards) {
 // Search Issue
 searchInput.addEventListener("input", function () {
   const searchText = searchInput.value.toLowerCase();
-
   const filteredIssues = allIssues.filter((issue) =>
     issue.title.toLowerCase().includes(searchText),
   );
-
   displayCards(filteredIssues);
-
   updateCounters(filteredIssues);
 });
 
@@ -196,9 +176,7 @@ async function openModal(issue) {
   const res = await fetch(
     `https://phi-lab-server.vercel.app/api/v1/lab/issue/${issue.id}`,
   );
-
   const data = await res.json();
-
   const singleIssue = data.data;
 
   modalTitle.innerText = singleIssue.title;
